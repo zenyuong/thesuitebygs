@@ -3,9 +3,13 @@ const axios = require("axios");
 const CreditCardTransactions = require("../models/CreditCardTransactions");
 
 module.exports = () => {
-  router.post("/register-credit-card-services", (req, res) => {
+  router.post("/register-credit-card-services", async (req, res) => {
     const response = "Insertion query to Mongo with form data";
-    return res.send({ ok: true, msg: "Credit Card System Registered" });
+    const card = await CreditCardTransactions.create({
+      name: "Name",
+      description: "desc",
+    });
+    return res.send({ ok: true, msg: "Credit Card System Registered", card });
   });
 
   router.get("/view-credit-card-transactions", (req, res) => {
