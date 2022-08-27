@@ -12,7 +12,7 @@ function Sidebar() {
 
     return (
         <div className="Sidebar">
-            <Button variant="dark" onClick={handleShow}>
+            <Button variant="dark" onClick={handleShow} size="lg">
                 <List />
             </Button>
 
@@ -26,34 +26,34 @@ function Sidebar() {
                     </Button>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <Button variant="dark">
+                    <Button variant="dark" onClick={handleClose}>
                         <Link to="/" className='text-decoration-none text-light'>
                             <House className='me-3' />Home
                         </Link>
                     </Button>
-                    <Button variant="dark">
+                    <Button variant="dark" onClick={handleClose}>
                         <Link to="/analytics" className='text-decoration-none text-light'>
                             <GraphUp className='me-3'/>Analytics
                         </Link>
                     </Button>
-                    <Button variant="dark">
+                    <Button variant="dark" onClick={handleClose}>
                         <Link to="/payments" className='text-decoration-none text-light'>
                             <Wallet className='me-3' />Payments
                         </Link>
                     </Button>
-                    <Button variant="dark">
+                    <Button variant="dark" onClick={handleClose}>
                         <Link to="assetmanagement" className='text-decoration-none text-light'>
                             <Briefcase className='me-3' />Asset Management
                         </Link>
                     </Button>
                     <hr />
-                    <Button variant="dark" className='offcanvasButtonStyle'>
+                    <Button variant="dark" onClick={handleClose}>
                         <Gear className='me-3' />Settings
                     </Button>
-                    <Button variant="dark" className='offcanvasButtonStyle'>
+                    <Button variant="dark" onClick={handleClose}>
                         <Award className='me-3' />Subscription
                     </Button>
-                    <Button variant="dark" className='offcanvasButtonStyle'>
+                    <Button variant="dark" onClick={handleClose}>
                         <PencilSquare className='me-3' />Consult an Expert
                     </Button>
                 </Offcanvas.Body>
