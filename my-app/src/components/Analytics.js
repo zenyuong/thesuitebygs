@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-function Payments() {
+function Analytics() {
     return (
         <div>
-            Payments
+            Analytics
         </div>
     )
 }
 
-export default Payments
+export default Analytics
