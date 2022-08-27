@@ -8,7 +8,6 @@ corsOptions = { origin: true, credentials: true };
 
 // 1. Ensure database is connected
 // 2. Start API server
-
 mongoose.connect(
   process.env.DATABASE_URI,
   () => {
