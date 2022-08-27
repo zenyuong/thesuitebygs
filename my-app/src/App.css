@@ -1,0 +1,17 @@
+.App {
+    padding: 20px;
+}
+
+.Sidebar {
+    position: fixed;
+    z-index: 1;
+}
+
+.Home {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(to bottom right, blue, purple);
+}
