@@ -10,7 +10,7 @@ function Sidebar() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="light" onClick={handleShow}>
                 Launch
             </Button>
 
