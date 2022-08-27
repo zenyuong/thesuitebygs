@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 
 function Home() {
  return (
-    <div>
-        Home
+    <div className='Home'>
     </div>
  )
 }
