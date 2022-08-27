@@ -1,8 +1,14 @@
-import { Footer } from './components/Footer.js'
+/* CSS */
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Components */
+import Sidebar from "./components/Sidebar";
+
 function App() {
   return (
-    <div>
-      <Footer></Footer>
+    <div className='App'>
+      <Sidebar></Sidebar>
     </div>
   );
 }
