@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
 
 const creditCardTransactionsSchema = new mongoose.Schema({
-  name: {
-    type: String,
+  userId: {
+    type: Number,
     required: true,
   },
-  description: {
-    type: String,
+  transactionAmount: {
+    type: Number,
     required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: () => Date.now(),
+    immutable: true,
   },
 });
 
