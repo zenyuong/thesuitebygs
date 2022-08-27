@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import {ArrowRight} from 'react-bootstrap-icons';
 
 function Sidebar() {
     const [show, setShow] = useState(false);
@@ -11,7 +12,7 @@ function Sidebar() {
     return (
         <>
             <Button variant="light" onClick={handleShow}>
-                Launch
+                <ArrowRight />
             </Button>
 
             <Offcanvas show={show} onHide={handleClose}>
