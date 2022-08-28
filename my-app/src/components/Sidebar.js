@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import {ArrowRight} from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
     const [show, setShow] = useState(false);
@@ -22,6 +23,9 @@ function Sidebar() {
                 <Offcanvas.Body>
                 Some text as placeholder. In real life you can have the elements you
                 have chosen. Like, text, images, lists, etc.
+                <Button>
+                    <Link to="/payments">Payments</Link>
+                </Button>
                 </Offcanvas.Body>
             </Offcanvas>
         </>
