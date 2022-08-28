@@ -33,8 +33,8 @@ You can use our application on Netlify or your local device.
 
 #### a) Netlify
 
-| Link |      |
-| ---- | ---- |
+| Link | https://tinyurl.com/thesuitebygs |
+| ---- | -------------------------------- |
 
 #### b) Local
 
