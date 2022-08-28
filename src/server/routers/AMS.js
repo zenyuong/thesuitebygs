@@ -25,12 +25,20 @@ module.exports = () => {
   });
 
   router.get("/historical-prices", async (req, res) => {
-    // const ticker = req.body.ticker
-    const ticker = "AAPL";
-    var url = `http://127.0.0.1:3001/getStocks/${ticker}`;
+    // const info = req.body.info
+    const info = "AAPL_2021-07-22_2021-08-22";
+    var url = `http://127.0.0.1:3001/getStocks/${info}`;
     const prices = await axios.get(url);
     const pricesData = prices["data"];
-    return res.send({ ok: true, msg: "Prices Fetched", pricesData });
+
+    if (prices["data"]["code"] != 200) {
+      return res.send({
+        ok: false,
+        msg: prices["data"]["message"],
+      });
+    } else {
+      return res.send({ ok: true, msg: "Prices Fetched", pricesData });
+    }
   });
 
   router.post("/calculate-risk", (req, res) => {
