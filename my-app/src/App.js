@@ -9,7 +9,6 @@ import React from 'react'
 
 /* Components */
 import Sidebar from "./components/Sidebar";
-import ConsultModal from './components/ConsultModal';
 import Home from "./components/Home";
 import Analytics from "./components/Analytics";
 import Payments from "./components/Payments";

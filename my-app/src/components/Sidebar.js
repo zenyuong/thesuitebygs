@@ -3,12 +3,15 @@ import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { Link } from 'react-router-dom';
 import { XLg, List, House, Wallet, GraphUp, Briefcase, Gear, Award, PencilSquare } from 'react-bootstrap-icons';
+import ConsultModal from './ConsultModal';
 
 function Sidebar() {
     const [show, setShow] = useState(true)
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [modalShow, setModalShow] = React.useState(false);
 
     return (
         <div className="Sidebar">
@@ -53,11 +56,16 @@ function Sidebar() {
                     <Button variant="dark" onClick={handleClose}>
                         <Award className='me-3' />Subscription
                     </Button>
-                    <Button variant="dark" onClick={handleClose}>
+                    <Button variant="dark" onClick={() => setModalShow(true)}>
                         <PencilSquare className='me-3' />Consult an Expert
                     </Button>
                 </Offcanvas.Body>
             </Offcanvas>
+
+            <ConsultModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </div>
     )
 }
