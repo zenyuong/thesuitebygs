@@ -55,15 +55,14 @@ module.exports = () => {
   });
 
   router.get("/live-market-statistics", async (req, res) => {
-    // TODO: #1 UNCOOMMENT LATER
-    // const ticker  = req.body.ticker
+
     var date = new Date()
     var day = date.getDate()
     var month = date.getMonth()
     var year = date.getFullYear()
 
-    // const info = req.body.ticker
-    // TODO: Replace with dynamic input
+    // TODO: #2 Uncomment Later
+    // const ticker  = req.body.ticker
     const ticker = 'AAPL'
 
     if (day < 10){
