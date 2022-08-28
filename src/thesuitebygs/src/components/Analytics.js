@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Search } from 'react-bootstrap-icons'
 import { ResponsiveContainer, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts'
 
 function randomNumberInRange(min, max) {
@@ -110,13 +106,25 @@ function calculateProfit() {
     return 345678
 }
 
-function Analytics() {
-    const [searchValue, setSearchValue] = useState("APPLE")
 
-    const searchMarket = () => {
-        console.log(searchValue)
+function changeLiveData(liveData){
+
+    const retData = []
+    console.log('THIS IS THE LVIE DATA', liveData.data.highestPrices)
+
+    for (let i=0; i<liveData.data['highestPrices'].length; i++){
+        retData.push(
+            {
+                'name': i, 
+                'Stock Prices' : liveData.data.highestPrices[i]
+            }
+        )
     }
 
+    return retData
+}
+
+function Analytics() {
     return (
         <div>
             <Row>
@@ -129,22 +137,8 @@ function Analytics() {
                     <CardGroup>
                         <Card className='shadow-sm'>
                             <Card.Body>
-                                <Row>
-                                    <Col>
-                                        <Card.Title>Today's Trends</Card.Title>
-                                        <Card.Subtitle className="mb-2 text-muted">
-                                            as of {new Date().toLocaleString() + ""}
-                                        </Card.Subtitle>
-                                    </Col>
-                                    <Col className='d-flex align-items-end'>
-                                        <InputGroup size="sm" className='mb-3'>
-                                            <Form.Control defaultValue={searchValue} onChange={e => setSearchValue(e.target.value)} />
-                                            <Button variant="dark" onClick={searchMarket}>
-                                                <Search />
-                                            </Button>
-                                        </InputGroup>
-                                    </Col>
-                                </Row>
+                                <Card.Title>Today's Trends</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">as of {new Date().toLocaleString() + ""}</Card.Subtitle>
                                 <ResponsiveContainer width="100%" height={250} className='d-flex flex-column h-100 justify-content-center align-items-center'>
                                     <LineChart data={getMarketData()}
                                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
