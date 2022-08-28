@@ -29,6 +29,7 @@ node index.js
 
 ```python
 # Terminal 2
+cd src/server
 py main.py
 ```
 
