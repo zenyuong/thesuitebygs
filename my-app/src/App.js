@@ -12,20 +12,26 @@ import Home from "./components/Home";
 import Analytics from "./components/Analytics";
 import Payments from "./components/Payments";
 import AssetManagement from "./components/AssetManagement"
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function App() {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
-    <div className='App'>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/analytics" element={<Analytics />} />
-        <Route path="/payments" element={<Payments />} />
-        <Route path="/assetmanagement" element={<AssetManagement />} />
-      </Routes>
-      <Sidebar />
-    </div>
+    <Row className='App'>
+      <Col xs={1}>
+        <Sidebar />
+      </Col>
+      <Col>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/payments" element={<Payments />} />
+          <Route path="/assetmanagement" element={<AssetManagement />} />
+        </Routes>
+      </Col>
+    </Row>
   );
 }
 

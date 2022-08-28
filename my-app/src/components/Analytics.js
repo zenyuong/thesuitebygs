@@ -12,7 +12,7 @@ function Analytics() {
     const [profit, setProfit] = useState(700000)
 
     return (
-        <div className='Analytics'>
+        <div>
             <Row>
                 <Col>
                     <CardGroup>
