@@ -47,11 +47,11 @@ function Payments() {
                                         <Row>
                                             <Col>
                                                 <p className='text-muted'>Interest Rate</p>
-                                                <h4>0.5%</h4>
+                                                <h4>{intRate}%</h4>
                                             </Col>
                                             <Col>
                                                 <p className='text-muted'>Annual Fee</p>
-                                                <h4>SGD 50.00</h4> 
+                                                <h4>SGD {annualFee}</h4> 
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -59,11 +59,11 @@ function Payments() {
                                         <Row>
                                             <Col>
                                                 <p className='text-muted'>Balance Transfer Fee</p>
-                                                <h4>2.5%</h4>
+                                                <h4>{balTransferFee}%</h4>
                                             </Col>
                                             <Col>
                                                 <p className='text-muted'>Sign Up Bonus</p>
-                                                <h4>OFF</h4>
+                                                <h4>{signupBonus}</h4>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -106,23 +106,23 @@ function Payments() {
                             <ListGroup variant="flush" className='text-center'>
                                 <ListGroup.Item className='p-3'>
                                     <p className='text-muted'>Active Users</p>
-                                    <h4>123</h4>
+                                    <h4>{activeUsers}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item className='p-3'>
                                     <p className='text-muted'>Avg. No. Transactions Per User</p>
-                                    <h4>8</h4>
+                                    <h4>{avgNoTransactions}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item className='p-3'>
                                     <p className='text-muted'>Total No. Transactions</p>
-                                    <h4>98</h4>
+                                    <h4>{totalNoTransactions}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item className='p-3'>
                                     <p className='text-muted'>Avg. Transaction per User</p>
-                                    <h4>SGD 12.52</h4>
+                                    <h4>SGD {avgTransactionAmt}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item className='p-3'>
                                     <p className='text-muted'>Total Amount Transacted</p>
-                                    <h4>SGD 1,072,022.00</h4>
+                                    <h4>SGD {totalTransactionAmt}</h4>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card>
