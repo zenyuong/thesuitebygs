@@ -81,8 +81,6 @@ const API = () => {
     return post("/payment/view-card-details", data);
   };
 
-  };
-
   return {
     fetchUpcomingPublicOfferings,
     fetchHistoricalPrices,
@@ -91,9 +89,9 @@ const API = () => {
     fetchLiveMarketStatistics,
     registerCreditCardServices,
     fetchCreditCardTransactions,
-    fetchCreditCardDetails,
-    updateCreditCardDetails,
-
+    fetchCreditCardDetails
   };
+
+}
 
 export default API;
