@@ -17,6 +17,7 @@ module.exports = () => {
   });
 
   router.post("/update-card-details", async (req, res) => {
+    console.log(req.body);
     const { id, interestRate, annualFee, balanceTransferFee, signupBonus } =
       req.body.cardDetails;
     try {
