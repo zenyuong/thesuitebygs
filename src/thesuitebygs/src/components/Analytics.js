@@ -1,65 +1,112 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts'
+import { ResponsiveContainer, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts'
 
 function randomNumberInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function Analytics() {
+function getMarketData() {
     const data = [
         {
           "name": "Page A",
           "uv": 4000,
-          "pv": 2400,
-          "amt": 2400
+          "pv": 2400
         },
         {
           "name": "Page B",
           "uv": 3000,
-          "pv": 1398,
-          "amt": 2210
+          "pv": 1398
         },
         {
           "name": "Page C",
           "uv": 2000,
-          "pv": 9800,
-          "amt": 2290
+          "pv": 9800
         },
         {
           "name": "Page D",
           "uv": 2780,
-          "pv": 3908,
-          "amt": 2000
+          "pv": 3908
         },
         {
           "name": "Page E",
           "uv": 1890,
-          "pv": 4800,
-          "amt": 2181
+          "pv": 4800
         },
         {
           "name": "Page F",
           "uv": 2390,
-          "pv": 3800,
-          "amt": 2500
+          "pv": 3800
         },
         {
           "name": "Page G",
           "uv": 3490,
-          "pv": 4300,
-          "amt": 2100
+          "pv": 4300
         }
       ]
+    
+      return data
+}
 
-    const [revenue, setRevenue] = useState(100000)
-    const [cost, setCost] = useState(300000)
-    const [profit, setProfit] = useState(700000)
+function getSalesData() {
+    const data = [
+        {
+          "name": "Page A",
+          "uv": 4000,
+          "pv": 2400
+        },
+        {
+          "name": "Page B",
+          "uv": 3000,
+          "pv": 1398
+        },
+        {
+          "name": "Page C",
+          "uv": 2000,
+          "pv": 9800
+        },
+        {
+          "name": "Page D",
+          "uv": 2780,
+          "pv": 3908
+        },
+        {
+          "name": "Page E",
+          "uv": 1890,
+          "pv": 4800
+        },
+        {
+          "name": "Page F",
+          "uv": 2390,
+          "pv": 3800
+        },
+        {
+          "name": "Page G",
+          "uv": 3490,
+          "pv": 4300
+        }
+      ]
+    
+      return data
+}
 
+function calculateRevenue() {
+    return '123456'
+}
+
+function calculateCost() {
+    return 789012
+}
+
+function calculateProfit() {
+    return 345678
+}
+
+function Analytics() {
     return (
         <div>
             <Row>
@@ -69,20 +116,18 @@ function Analytics() {
                             <Card.Body>
                                 <Card.Title>Today's Trends</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">as of {new Date().toLocaleString() + ""}</Card.Subtitle>
-                                <Row className='align-items-center justify-content-center'>
-                                    <ResponsiveContainer width="100%" height={250}>
-                                        <LineChart width={730} height={250} data={data}
-                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis dataKey="name" />
-                                                <YAxis />
-                                                <Tooltip />
-                                                <Legend />
-                                                <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-                                                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                                        </LineChart>
-                                    </ResponsiveContainer>
-                                </Row>
+                                <ResponsiveContainer width="100%" height={250} className='d-flex flex-column h-100 justify-content-center align-items-center'>
+                                    <LineChart data={getMarketData()}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis dataKey="name" />
+                                            <YAxis />
+                                            <Tooltip />
+                                            <Legend />
+                                            <Line type="monotone" dataKey="pv" stroke="#8884d8" />
+                                            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                                    </LineChart>
+                                </ResponsiveContainer>
                             </Card.Body>
                         </Card>
                         <Card className='shadow-sm'>
@@ -113,39 +158,63 @@ function Analytics() {
                 </Col>
             </Row>
             <Row className='mt-4'>
-                <Col>
+                <Col xs={4}>
                     <Card className='shadow-sm'>
                         <Card.Body>
-                            <Card.Subtitle className="mb-2 text-muted">Revenue by Department</Card.Subtitle>
-                            <Card.Title>{revenue}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">Revenue</Card.Subtitle>
+                            <Card.Title>{calculateRevenue()}</Card.Title>
                             <hr></hr>
-                            <Card.Text>
-                                Graph
-                            </Card.Text>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={getSalesData()}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="pv" fill="#8884d8" />
+                                    <Bar dataKey="uv" fill="#82ca9d" />
+                                </BarChart>
+                            </ResponsiveContainer>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col>
+                <Col xs={4}>
                     <Card className='shadow-sm'>
                         <Card.Body>
                             <Card.Subtitle className="mb-2 text-muted">Cost</Card.Subtitle>
-                            <Card.Title>{cost}</Card.Title>
+                            <Card.Title>{calculateCost()}</Card.Title>
                             <hr></hr>
-                            <Card.Text>
-                                Graph
-                            </Card.Text>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={getSalesData()}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="pv" fill="#8884d8" />
+                                    <Bar dataKey="uv" fill="#82ca9d" />
+                                </BarChart>
+                            </ResponsiveContainer>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col>
+                <Col xs={4}>
                     <Card className='shadow-sm'>
                         <Card.Body>
                             <Card.Subtitle className="mb-2 text-muted">Profit</Card.Subtitle>
-                            <Card.Title>{profit}</Card.Title>
+                            <Card.Title>{calculateProfit()}</Card.Title>
                             <hr></hr>
-                            <Card.Text>
-                                Graph
-                            </Card.Text>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={getSalesData()}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="pv" fill="#8884d8" />
+                                    <Bar dataKey="uv" fill="#82ca9d" />
+                                </BarChart>
+                            </ResponsiveContainer>
                         </Card.Body>
                     </Card>
                 </Col>
