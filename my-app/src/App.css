@@ -1,7 +1,32 @@
 .App {
     padding: 20px;
+    height: 100%;
 }
 
-.main-modal {
-    background-color: grey;
+.Sidebar {
+    position: sticky;
+    z-index: 1;
+}
+
+.Home {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: url("home.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden
+}
+
+.Analytics {
+    position: absolute;
+    padding: 20px;
+    padding-left: 100px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
 }

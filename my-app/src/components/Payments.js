@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 function Payments() {
-
     return (
         <div>
             Payments
