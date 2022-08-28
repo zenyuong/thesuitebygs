@@ -11,9 +11,17 @@ import Button from 'react-bootstrap/Button';
 function Payments() {
 
     const [date, setDate] = useState("27 August 2022")
-    const [revenue, setRevenue] = useState(100000)
-    const [cost, setCost] = useState(300000)
-    const [profit, setProfit] = useState(700000)
+
+    const [intRate, setIntRate] = useState(0.5)
+    const [annualFee, setAnnualFee] = useState(50.00)
+    const [balTransferFee, setBalTransferFee] = useState(2.5)
+    const [signupBonus, setSignupBonus] = useState("OFF")
+
+    const [activeUsers, setActiveUsers] = useState(123)
+    const [avgNoTransactions, setAvgNoTransactions] = useState(8)
+    const [totalNoTransactions, setTotalNoTransactions] = useState(98)
+    const [avgTransactionAmt, setAvgTransactionAmt] = useState(12.52)
+    const [totalTransactionAmt, setTotalTransactionAmt] = useState(1072022.00)
 
     return (
         <div className='Payments'>
