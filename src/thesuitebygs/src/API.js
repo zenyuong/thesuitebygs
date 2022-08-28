@@ -73,7 +73,7 @@ const API = () => {
   };
 
   const fetchCreditCardTransactions = (data) => {
-    return get("/payment/view-credit-card-transactions");
+    return post("/payment/view-credit-card-transactions", data);
   };
 
   const fetchCreditCardDetails = (data) => {

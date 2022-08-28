@@ -10,10 +10,15 @@ import Button from "react-bootstrap/Button";
 import API from "../API";
 
 function Payments() {
-  const { fetchCreditCardDetails, updateCreditCardDetails } = API();
+  const {
+    fetchCreditCardDetails,
+    updateCreditCardDetails,
+    fetchCreditCardTransactions,
+  } = API();
   const [date, setDate] = useState("27 August 2022");
   const [loading, setLoading] = useState(true);
   const [cardDetails, setCardDetails] = useState();
+  const [filterOption, setFilterOption] = useState("week");
 
   const [activeUsers, setActiveUsers] = useState(123);
   const [avgNoTransactions, setAvgNoTransactions] = useState(8);
@@ -50,21 +55,41 @@ function Payments() {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     handleEditStatus();
-    const updateCreditCardDetails = async () => {
-      const response = await updateCreditCardDetails({
-        cardDetails: cardDetails,
+    const response = await updateCreditCardDetails({
+      cardDetails: cardDetails,
+    });
+
+    if (response.data.ok) {
+      console.log("YO");
+    } else {
+      alert("Error Occured");
+    }
+    setLoading(false);
+  };
+
+  const handleSelectEdit = async (event) => {
+    const option = event.currentTarget?.value;
+    setFilterOption(option);
+  };
+
+  //OVER HERE
+  useEffect(() => {
+    const getUsageInsights = async () => {
+      const response = await fetchCreditCardTransactions({
+        filter: filterOption,
       });
+
       if (response.data.ok) {
-        console.log("YO");
+        console.log(response.data.transactions);
       } else {
         alert("Error Occured");
       }
       setLoading(false);
     };
-    updateCreditCardDetails();
-  };
+    getUsageInsights();
+  }, [filterOption]);
 
   if (loading) return "loading...";
 
@@ -202,10 +227,15 @@ function Payments() {
                       <Form.Label htmlFor="subjectMatter">
                         Show numbers by
                       </Form.Label>
-                      <Form.Select required id="subjectMatter">
-                        <option>Week</option>
-                        <option>Month</option>
-                        <option>Year</option>
+                      <Form.Select
+                        required
+                        id="subjectMatter"
+                        value={filterOption}
+                        onChange={handleSelectEdit}
+                      >
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                        <option value="year">Year</option>
                       </Form.Select>
                     </Form.Group>
                   </Col>
