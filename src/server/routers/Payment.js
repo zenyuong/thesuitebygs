@@ -16,6 +16,9 @@ module.exports = () => {
     });
   });
 
+  router.post("/update-card-details", async (req, res) => {
+    console.log(req.body);
+  });
   router.get("/view-credit-card-transactions", async (req, res) => {
     const filter = "week";
     // const filter= req.body.filter

@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import API from "../API";
 
 function Payments() {
-  const { fetchCreditCardDetails } = API();
+  const { fetchCreditCardDetails, updateCreditCardDetails } = API();
   const [date, setDate] = useState("27 August 2022");
   const [loading, setLoading] = useState(true);
   const [cardDetails, setCardDetails] = useState();
@@ -52,6 +52,18 @@ function Payments() {
 
   const handleSave = () => {
     handleEditStatus();
+    const updateCreditCardDetails = async () => {
+      const response = await updateCreditCardDetails({
+        cardDetails: cardDetails,
+      });
+      if (response.data.ok) {
+        console.log("YO");
+      } else {
+        alert("Error Occured");
+      }
+      setLoading(false);
+    };
+    updateCreditCardDetails();
   };
 
   if (loading) return "loading...";
