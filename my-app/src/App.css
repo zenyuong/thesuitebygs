@@ -21,7 +21,7 @@
     overflow: hidden
 }
 
-.Analytics {
+.Analytics, .Payments {
     position: absolute;
     padding: 20px;
     padding-left: 100px;
@@ -29,4 +29,11 @@
     height: 100%;
     left: 0;
     top: 0;
+}
+
+.PaymentsCard {
+    width: 85%;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
