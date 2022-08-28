@@ -58,7 +58,7 @@ function AssetManagement() {
         <div className='Payments'>
             <Row>
                 <div className='h1'>
-                    Your Asset Management Dashboard
+                    Your <b>Asset Management</b> at a Glance
                 </div>
             </Row>
             <Row className='mt-2'>
