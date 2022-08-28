@@ -116,7 +116,7 @@ function changeLiveData(liveData){
     for (let i=0; i<liveData.data['highestPrices'].length; i++){
         retData.push(
             {
-                'name': i, 
+                'name': i+1 , 
                 'Stock Prices' : liveData.data.highestPrices[i]
             }
         )
