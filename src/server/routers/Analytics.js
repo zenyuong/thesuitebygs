@@ -54,9 +54,36 @@ module.exports = () => {
     }
   });
 
-  router.get("/live-market-statistics", (req, res) => {
-    const statistics = "API Call";
-    return res.send({ ok: true, msg: "Statistics Fetched", statistics });
+  router.get("/live-market-statistics", async (req, res) => {
+    // TODO: #1 UNCOOMMENT LATER
+    // const ticker  = req.body.ticker
+    var date = new Date()
+    var day = date.getDate()
+    var month = date.getMonth()
+    var year = date.getFullYear()
+
+    // const info = req.body.ticker
+    // TODO: Replace with dynamic input
+    const ticker = 'AAPL'
+
+    if (day < 10){
+      date = '0'+ String(day)
+    }
+
+    if (month < 10){
+      month = '0' + String(month)
+    }
+
+    var startDate = `${String(year)}-${String(month)}-01`
+    var endDate = `${String(year)}-${String(month)}-${String(day)}`
+
+    // Creating the info variable
+    var info = `${ticker}_${startDate}_${endDate}`
+
+    var url = `http://127.0.0.1:3001/getStocks/${info}`;
+    const prices = await axios.get(url);
+    const pricesData = prices["data"];
+    return res.send({ ok: true, msg: "Statistics Fetched", pricesData });
   });
 
   return router;
