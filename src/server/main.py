@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, request as req, jsonify
 from flask_cors import CORS
 import requests
