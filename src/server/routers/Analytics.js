@@ -50,15 +50,13 @@ module.exports = () => {
   });
 
   router.get("/live-market-statistics", async (req, res) => {
-    // const ticker  = req.body.ticker
-
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth();
     var year = date.getFullYear();
 
-    // const info = req.body.ticker
-    // TODO: Replace with dynamic input
+    // TODO: #2 Uncomment Later
+    // const ticker  = req.body.ticker
     const ticker = "AAPL";
 
     if (day < 10) {
@@ -69,19 +67,30 @@ module.exports = () => {
       month = "0" + String(month);
     }
 
+    //  Concatenate the day, week and year to derive a start and end date in the format of YYYY-MM-DD
     var startDate = `${String(year)}-${String(month)}-01`;
     var endDate = `${String(year)}-${String(month)}-${String(day)}`;
 
-    // Creating the info variable
+    // Creating the info variable so that is can be passed into the Flask call
     var info = `${ticker}_${startDate}_${endDate}`;
-    try {
-      const url = `http://127.0.0.1:3001/getStocks/${info}`;
-      const prices = await axios.get(url);
-      const pricesData = prices["data"];
-      console.log(pricesData);
-      return res.send({ ok: true, msg: "Statistics Fetched", pricesData });
-    } catch (e) {
-      return res.send({ ok: false, msg: e });
+
+    // Calling Flask function, Returns price from start of the month and current date.
+    var url = `http://127.0.0.1:3001/getStocks/${info}`;
+    const prices = await axios.get(url);
+    const pricesData = prices["data"];
+
+    // Checking if API call was successful
+    if (prices["data"]["code"] == 200) {
+      return res.send({
+        ok: true,
+        msg: `Stock prices fetched from ${startDate} to ${endDate}}`,
+        pricesData,
+      });
+    } else {
+      return res.send({
+        ok: false,
+        msg: `Stock prices not fetched from ${startDate} to ${endDate}}`,
+      });
     }
   });
 

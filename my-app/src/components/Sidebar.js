@@ -16,7 +16,7 @@ function Sidebar() {
                 <List />
             </Button>
 
-            <Offcanvas className="bg-dark text-light" style={{width: "250px"}} show={show} onHide={handleClose} backdrop={false}>
+            <Offcanvas className="bg-dark text-light" style={{width: "250px"}} show={show} onHide={handleClose} backdrop={false} scroll>
                 <Offcanvas.Header>
                     <Offcanvas.Title>
                         <img src="https://fshcdn.com/hairstyles/business-man_cut/0bc51f5e-7f68-46b2-b5c8-0f839c42537a.jpg?webp=1&w=256" className='rounded-circle me-3' alt="user" style={{width: "40px", height: "40px"}} />My Suite
@@ -26,7 +26,7 @@ function Sidebar() {
                     </Button>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <Button variant="dark" onClick={handleClose}>
+                    <Button variant="dark">
                         <Link to="/" className='text-decoration-none text-light'>
                             <House className='me-3' />Home
                         </Link>
