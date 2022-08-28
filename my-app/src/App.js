@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 /* CSS */
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react'
 
 /* Components */
 import Sidebar from "./components/Sidebar";
@@ -15,6 +16,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function App() {
+  const [modalShow, setModalShow] = React.useState(false);
+
   return (
     <Row className='App'>
       <Col xs={1}>
