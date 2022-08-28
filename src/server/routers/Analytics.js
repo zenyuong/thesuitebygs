@@ -51,14 +51,14 @@ module.exports = () => {
     }
   });
 
-  router.post("/live-market-statistics", async (req, res) => {
+  router.get("/live-market-statistics", async (req, res) => {
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth();
     var year = date.getFullYear();
 
     // TODO: #2 Uncomment Later
-    const ticker  = req.body.ticker
+    const ticker  = req.body
     console.log("THIS IS THE TICKER", ticker)
     // const ticker = "AAPL";
 
@@ -76,13 +76,11 @@ module.exports = () => {
 
     // Creating the info variable so that is can be passed into the Flask call
     var info = `${ticker}_${startDate}_${endDate}`;
-    console.log(info)
 
     // Calling Flask function, Returns price from start of the month and current date.
     var url = `http://127.0.0.1:3001/getStocks/${info}`;
     const prices = await axios.get(url);
     const pricesData = prices["data"];
-    console.log(pricesData) 
 
     // Checking if API call was successful
     if (prices["data"]["code"] == 200) {
