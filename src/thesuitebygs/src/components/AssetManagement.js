@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
@@ -7,8 +7,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import { ResponsiveContainer, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts'
+import API from '../API';
 
-function getMarketData() {
+function getHistoricalPrices() {
     const data = [
         {
           "name": "Page A",
@@ -49,12 +50,47 @@ function getMarketData() {
     
       return data
 }
+function randomNumberInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomListings(listings) {
+    var idxList = [];
+    var randomListings = [];
+
+    for (let i = 0; i < 3; i++) {
+        idxList.push(randomNumberInRange(0, 29));
+    }    
+    for (const idx of idxList) {
+        console.log(idx)
+        randomListings.push(listings[idx])
+    }
+
+    return randomListings
+}
 
 function AssetManagement() {
-
+    const [loading, setLoading]= useState(true)
+    const {fetchUpcomingPublicOfferings} =API();
+    const [upcomingListings, setUpcomingPublicListings]= useState();
     const [riskAmt, setRiskAmt] = useState(0.5)
 
-     return (
+    useEffect(() => {
+        const getUpcomingListings = async () => {
+          const data_upcomingListings = await fetchUpcomingPublicOfferings();
+          if (data_upcomingListings.data.ok) {
+            setUpcomingPublicListings(getRandomListings(data_upcomingListings.data.upcomingPublicOfferings))
+            console.log()
+          } else {
+          }
+          setLoading(false)
+        };
+        getUpcomingListings();
+      }, []);
+
+    console.log(upcomingListings)
+    if (loading) return "loading..."
+    return (
         <div className='Payments'>
             <Row>
                 <div className='h1'>
@@ -82,61 +118,34 @@ function AssetManagement() {
                                             <Col>
                                                 <p className='text-muted'>List Price</p>
                                             </Col>
-                                            <Col>
-                                                <p className='text-muted'>% Change</p>
-                                            </Col>
                                         </Row>
                                     </ListGroup.Item>
-                                    <ListGroup.Item className='p-3'>
-                                        <Row>
-                                            <Col>
-                                                <h4>AAPL</h4>
-                                            </Col>
-                                            <Col>
-                                                <p>Apple, Inc.</p>
-                                            </Col>
-                                            <Col>
-                                                <h4>USD 54.01</h4>
-                                            </Col>
-                                            <Col>
-                                                <h4>+0.45</h4>
-                                            </Col>
-                                        </Row>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item className='p-3'>
-                                        <Row>
-                                            <Col>
-                                                <h4>AAPL</h4>
-                                            </Col>
-                                            <Col>
-                                                <p>Apple, Inc.</p>
-                                            </Col>
-                                            <Col>
-                                                <h4>USD 54.01</h4>
-                                            </Col>
-                                            <Col>
-                                                <h4>+0.45</h4>
-                                            </Col>
-                                        </Row>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item className='p-3'>
-                                        <Row>
-                                            <Col>
-                                                <h4>AAPL</h4>
-                                            </Col>
-                                            <Col>
-                                                <p>Apple, Inc.</p>
-                                            </Col>
-                                            <Col>
-                                                <h4>USD 54.01</h4>
-                                            </Col>
-                                            <Col>
-                                                <h4>+0.45</h4>
-                                            </Col>
-                                        </Row>
-                                    </ListGroup.Item>
-                                </ListGroup>
-                         
+                                    {   
+                                        upcomingListings.map((item, i) => (
+                                            <ListGroup.Item>
+                                                <Row>
+                                                    <Col>
+                                                        <h4>
+                                                            {item.ticker}
+                                                        </h4>
+                                                    </Col>
+                                                    <Col>
+                                                        <p>
+                                                            {item.companyName}
+                                                        </p>
+                                                    </Col>
+                                                    <Col>
+                                                        <h4>
+                                                            {item.listPrice}
+                                                        </h4>
+                                                    </Col>
+                                                </Row>
+                                            </ListGroup.Item>
+                                            
+                                        ))
+                                        
+                                    }      
+                                </ListGroup>                   
                             </Card.Body>
                         </Card>
                 </Col>
@@ -238,7 +247,7 @@ function AssetManagement() {
                     <Card>
                         <Card.Body>
                             <ResponsiveContainer width="100%" height={400} className=' h-100 justify-content-center align-items-center'>
-                                    <LineChart data={getMarketData()}
+                                    <LineChart data={getHistoricalPrices()}
                                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                             <CartesianGrid strokeDasharray="3 3" />
                                             <XAxis dataKey="name" />
