@@ -24,7 +24,7 @@ module.exports = () => {
     }
   });
 
-  router.get("/historical-prices", async (req, res) => {
+  router.post("/historical-prices", async (req, res) => {
     // const ticker = req.body.ticker
     const ticker = "AAPL";
     var url = `http://127.0.0.1:3001/getStocks/${ticker}`;
