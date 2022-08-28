@@ -24,6 +24,7 @@ The Suite is a one-stop financial cloud for small to medium enterprises who want
 cd src/server
 npm i
 node index.js
+py main.py
 ```
 
 ### 2. Start the app
