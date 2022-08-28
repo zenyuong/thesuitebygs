@@ -1,6 +1,7 @@
 const router = require("express").Router();
 var csv = require("fast-csv");
 const multer = require("multer");
+const axios = require('axios')
 const CreditCard = require("../models/CreditCard");
 
 module.exports = () => {
@@ -57,8 +58,9 @@ module.exports = () => {
     var year = date.getFullYear();
 
     // TODO: #2 Uncomment Later
-    // const ticker  = req.body.ticker
-    const ticker = "AAPL";
+    const ticker  = req.body
+    console.log("THIS IS THE TICKER", ticker)
+    // const ticker = "AAPL";
 
     if (day < 10) {
       date = "0" + String(day);
@@ -85,8 +87,8 @@ module.exports = () => {
       return res.send({
         ok: true,
         msg: `Stock prices fetched from ${startDate} to ${endDate}}`,
-        pricesData,
-      });
+        data: pricesData,
+      }); 
     } else {
       return res.send({
         ok: false,
