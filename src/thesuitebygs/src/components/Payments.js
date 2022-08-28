@@ -27,7 +27,7 @@ function Payments() {
         <div className='Payments'>
             <Row>
                 <div className='h1'>
-                    The <b>BananaPay</b> Dashboard
+                    Your <b>Payments System</b> at a Glance
                 </div>
             </Row>
             <Row className='mt-2'>
@@ -36,7 +36,7 @@ function Payments() {
                         <Card border="white">
                             <Card.Body>
                                 <div className='h2'>
-                                    Card Details
+                                    <b>BananaPay</b> Card Details
                                 </div>
                                 <Card.Subtitle className="mb-2 text-muted">as of {date}</Card.Subtitle>
                                 <div className='text-center'>
