@@ -15,3 +15,30 @@ The Suite is a one-stop financial cloud for small to medium enterprises who want
 | Sophia Chow Hui Ru | https://github.com/sophiaaachow |
 
 ###### In collaboration with Goldman Sachs and Ellipsis Tech Series
+
+## How to run
+
+### 1. Start the server
+
+```
+cd src/server
+npm i
+node index.js
+```
+
+### 2. Start the app
+
+You can use our application on Netlify or your local device.
+
+#### a) Netlify
+
+| Link |      |
+| ---- | ---- |
+
+#### b) Local
+
+```
+cd src/thesuitebygs
+npm i
+npm start
+```
