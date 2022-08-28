@@ -22,14 +22,14 @@ The Suite is a one-stop financial cloud for small to medium enterprises who want
 
 ```python
 # Terminal 1
-cd src/server
+cd src\server
 npm i
 node index.js
 ```
 
 ```python
 # Terminal 2
-cd src/server
+cd src\server
 py main.py
 ```
 
