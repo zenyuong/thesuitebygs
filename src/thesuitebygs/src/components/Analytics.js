@@ -110,6 +110,11 @@ function Analytics() {
     return (
         <div>
             <Row>
+                <div className='h1'>
+                    Your <b>Analytics</b> at a Glance
+                </div>
+            </Row>
+            <Row className='mt-2'>
                 <Col>
                     <CardGroup>
                         <Card className='shadow-sm'>
