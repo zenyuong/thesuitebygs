@@ -106,6 +106,24 @@ function calculateProfit() {
     return 345678
 }
 
+
+function changeLiveData(liveData){
+
+    const retData = []
+    console.log('THIS IS THE LVIE DATA', liveData.data.highestPrices)
+
+    for (let i=0; i<liveData.data['highestPrices'].length; i++){
+        retData.push(
+            {
+                'name': i, 
+                'Stock Prices' : liveData.data.highestPrices[i]
+            }
+        )
+    }
+
+    return retData
+}
+
 function Analytics() {
     return (
         <div>
