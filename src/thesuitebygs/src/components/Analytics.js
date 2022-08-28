@@ -177,7 +177,7 @@ function Analytics() {
                     <CardGroup>
                         <Card className='shadow-sm'>
                             <Card.Body>
-                                <Card.Title>Today's Trends</Card.Title>
+                                <Card.Title>This Month's Trend for AAPL</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">as of {new Date().toLocaleString() + ""}</Card.Subtitle>
                                 <ResponsiveContainer width="100%" height={250} className='d-flex flex-column h-100 justify-content-center align-items-center'>
                                     <LineChart data={newData}
