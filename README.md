@@ -1,6 +1,6 @@
 # The Suite by Goldman Sachs
 
-![](C:\Users\User\Downloads\Home.png)
+![Home](C:\Users\User\Downloads\Home.png)
 
 The Suite is a one-stop financial cloud for small to medium enterprises who want to implement financial services. We aim to provide a quick and simple online platform to help companies set up and maintain their own financial ecosystem.
 
