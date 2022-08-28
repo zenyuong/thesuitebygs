@@ -17,11 +17,25 @@ module.exports = () => {
   });
 
   router.post("/update-card-details", async (req, res) => {
-    console.log(req.body);
+    const { id, interestRate, annualFee, balanceTransferFee, signupBonus } =
+      req.body.cardDetails;
+    try {
+      const response = await CreditCard.findOneAndUpdate(
+        { id: id },
+        {
+          interestRate: interestRate,
+          annualFee: annualFee,
+          balanceTransferFee: balanceTransferFee,
+          signupBonus: signupBonus,
+        }
+      );
+      return res.send({ ok: true, response });
+    } catch (e) {
+      return res.send({ ok: false, e });
+    }
   });
-  router.get("/view-credit-card-transactions", async (req, res) => {
-    const filter = "week";
-    // const filter= req.body.filter
+  router.post("/view-credit-card-transactions", async (req, res) => {
+    const { filter } = req.body;
     let query;
 
     switch (filter) {

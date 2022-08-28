@@ -66,7 +66,7 @@ function ConsultForm() {
       </Form.Group>
       
       <div className="d-grid">
-        <Button variant="primary" size="lg" type="submit">
+        <Button variant="outline-dark" size="lg" type="submit">
           Submit
         </Button>
       </div>

@@ -53,7 +53,7 @@ const API = () => {
   };
 
   const fetchHistoricalPrices = (data) => {
-    return get("/asset-management-system/historical-prices");
+    return post("/asset-management-system/historical-prices", data);
   };
 
   const calculateRisk = (data) => {
@@ -66,6 +66,7 @@ const API = () => {
 
   const fetchLiveMarketStatistics = (data) => {
     return post("/analytics/live-market-statistics", data);
+
   };
 
   const registerCreditCardServices = (data) => {
@@ -73,15 +74,11 @@ const API = () => {
   };
 
   const fetchCreditCardTransactions = (data) => {
-    return get("/payment/view-credit-card-transactions");
+    return post("/payment/view-credit-card-transactions", data);
   };
 
   const fetchCreditCardDetails = (data) => {
     return post("/payment/view-card-details", data);
-  };
-
-  const updateCreditCardDetails = (data) => {
-    return post("/payment/update-card-details", data);
   };
 
   return {
@@ -92,9 +89,9 @@ const API = () => {
     fetchLiveMarketStatistics,
     registerCreditCardServices,
     fetchCreditCardTransactions,
-    fetchCreditCardDetails,
-    updateCreditCardDetails,
+    fetchCreditCardDetails
   };
-};
+
+}
 
 export default API;

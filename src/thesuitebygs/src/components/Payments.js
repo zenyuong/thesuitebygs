@@ -10,16 +10,21 @@ import Button from "react-bootstrap/Button";
 import API from "../API";
 
 function Payments() {
-  const { fetchCreditCardDetails, updateCreditCardDetails } = API();
-  const [date, setDate] = useState("27 August 2022");
+  const {
+    fetchCreditCardDetails,
+    updateCreditCardDetails,
+    fetchCreditCardTransactions,
+  } = API();
+
   const [loading, setLoading] = useState(true);
   const [cardDetails, setCardDetails] = useState();
+  const [filterOption, setFilterOption] = useState("week");
 
-  const [activeUsers, setActiveUsers] = useState(123);
-  const [avgNoTransactions, setAvgNoTransactions] = useState(8);
-  const [totalNoTransactions, setTotalNoTransactions] = useState(98);
-  const [avgTransactionAmt, setAvgTransactionAmt] = useState(12.52);
-  const [totalTransactionAmt, setTotalTransactionAmt] = useState(1072022.0);
+  const [activeUsers, setActiveUsers] = useState(0);
+  const [avgNoTransactions, setAvgNoTransactions] = useState(0);
+  const [totalNoTransactions, setTotalNoTransactions] = useState(0);
+  const [avgTransactionAmt, setAvgTransactionAmt] = useState(0);
+  const [totalTransactionAmt, setTotalTransactionAmt] = useState(0);
 
   const [editStatus, setEditStatus] = useState(false);
 
@@ -50,23 +55,62 @@ function Payments() {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     handleEditStatus();
-    const updateCreditCardDetails = async () => {
-      const response = await updateCreditCardDetails({
-        cardDetails: cardDetails,
+    const response = await updateCreditCardDetails({
+      cardDetails: cardDetails,
+    });
+
+    if (response.data.ok) {
+      console.log("YO");
+    } else {
+      alert("Error Occured");
+    }
+    setLoading(false);
+  };
+
+  const handleSelectEdit = async (event) => {
+    const option = event.currentTarget?.value;
+    setFilterOption(option);
+  };
+
+  //OVER HERE
+  useEffect(() => {
+    const getUsageInsights = async () => {
+      const response = await fetchCreditCardTransactions({
+        filter: filterOption,
       });
+
       if (response.data.ok) {
-        console.log("YO");
+        let transactions = response.data.transactions
+        console.log(transactions);
+        let totalAmount = 0
+        let userList = []
+        for (let i = 0; i < transactions.length; i++) {
+          totalAmount = totalAmount + transactions[i].transactionAmount
+          if (!userList.includes(transactions[i].userid)) {
+            userList.push(transactions[i].userId)
+          }
+        }
+        setTotalNoTransactions(transactions.length)
+        setTotalTransactionAmt(totalAmount)
+        setActiveUsers(userList.length)
+        if (transactions.length > 0) {
+          setAvgNoTransactions((transactions.length / userList.length).toFixed(2))
+          setAvgTransactionAmt((totalAmount / userList.length).toFixed(2))
+        } else {
+          setAvgNoTransactions(0)
+          setAvgTransactionAmt(0)
+        }
       } else {
         alert("Error Occured");
       }
       setLoading(false);
     };
-    updateCreditCardDetails();
-  };
+    getUsageInsights();
+  }, [filterOption]);
 
-  if (loading) return "loading...";
+  if (loading) return "Loading...";
 
   return (
     <div className="Payments">
@@ -82,7 +126,7 @@ function Payments() {
               <Card.Body>
                 <div className="h2">Card Details</div>
                 <Card.Subtitle className="mb-2 text-muted">
-                  as of {date}
+                  as of {new Date().toLocaleString() + ""}
                 </Card.Subtitle>
                 <div className="text-center">
                   <img
@@ -124,21 +168,17 @@ function Payments() {
                         <Row>
                           <Col>
                             <p className="text-muted">Interest Rate</p>
-                            <input
-                              type="text"
-                              name="interestRate"
+                            <Form.Control
                               onChange={handleInlineEdit}
-                              value={cardDetails.interestRate}
-                            ></input>
+                              placeholder={cardDetails.interestRate}
+                            ></Form.Control>
                           </Col>
                           <Col>
                             <p className="text-muted">Annual Fee</p>
-                            <input
-                              type="text"
-                              name="annualFee"
+                            <Form.Control
                               onChange={handleInlineEdit}
-                              value={cardDetails.annualFee}
-                            ></input>
+                              placeholder={cardDetails.annualFee}
+                            ></Form.Control>
                           </Col>
                         </Row>
                       </ListGroup.Item>
@@ -146,21 +186,17 @@ function Payments() {
                         <Row>
                           <Col>
                             <p className="text-muted">Balance Transfer Fee</p>
-                            <input
-                              type="text"
-                              name="balanceTransferFee"
+                            <Form.Control
                               onChange={handleInlineEdit}
-                              value={cardDetails.balanceTransferFee}
-                            ></input>
+                              placeholder={cardDetails.balanceTransferFee}
+                            ></Form.Control>
                           </Col>
                           <Col>
                             <p className="text-muted">Sign Up Bonus</p>
-                            <input
-                              type="text"
-                              name="signupBonus"
+                            <Form.Control
                               onChange={handleInlineEdit}
-                              value={cardDetails.signupBonus}
-                            ></input>
+                              placeholder={cardDetails.signupBonus}
+                            ></Form.Control>
                           </Col>
                         </Row>
                       </ListGroup.Item>
@@ -194,7 +230,7 @@ function Payments() {
                   <Col>
                     <div className="h2">Usage Insights</div>
                     <Card.Subtitle className="mb-2 text-muted">
-                      as of {date}
+                      as of {new Date().toLocaleString() + ""}
                     </Card.Subtitle>
                   </Col>
                   <Col>
@@ -202,10 +238,15 @@ function Payments() {
                       <Form.Label htmlFor="subjectMatter">
                         Show numbers by
                       </Form.Label>
-                      <Form.Select required id="subjectMatter">
-                        <option>Week</option>
-                        <option>Month</option>
-                        <option>Year</option>
+                      <Form.Select
+                        required
+                        id="subjectMatter"
+                        value={filterOption}
+                        onChange={handleSelectEdit}
+                      >
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                        <option value="year">Year</option>
                       </Form.Select>
                     </Form.Group>
                   </Col>
