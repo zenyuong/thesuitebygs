@@ -1,6 +1,7 @@
 const router = require("express").Router();
 var csv = require("fast-csv");
 const multer = require("multer");
+const CreditCard = require("../models/CreditCard");
 
 module.exports = () => {
   const storage = multer.diskStorage({
@@ -93,6 +94,14 @@ module.exports = () => {
       });
     }
   });
-
+  // router.get("/dwad", async (req, res) => {
+  //   const response = await CreditCard.create({
+  //     interestRate: 0.5,
+  //     annualFee: 100,
+  //     balanceTransferFee: 200,
+  //     signupBonus: 5000,
+  //   });
+  //   console.log(response);
+  // });
   return router;
 };

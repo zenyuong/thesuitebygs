@@ -65,18 +65,19 @@ const API = () => {
   };
 
   const fetchLiveMarketStatistics = (data) => {
-    return get("/analytics/live-market-statistics");
+    return get("/analytics/live-market-statistics", data);
   };
 
   const registerCreditCardServices = (data) => {
     return post("/payment/register-credit-card-services", data);
   };
+
   const fetchCreditCardTransactions = (data) => {
     return get("/payment/view-credit-card-transactions");
   };
 
   const fetchCreditCardDetails = (data) => {
-    return get("/payment/view-card-details");
+    return post("/payment/view-card-details", data);
   };
 
   return {
@@ -87,7 +88,6 @@ const API = () => {
     fetchLiveMarketStatistics,
     registerCreditCardServices,
     fetchCreditCardTransactions,
-    getCreditCardDetails,
     fetchCreditCardDetails,
   };
 };

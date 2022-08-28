@@ -2,18 +2,18 @@ const router = require("express").Router();
 const axios = require("axios");
 const CreditCardTransactions = require("../models/CreditCardTransactions");
 const UpcomingListings = require("../models/UpcomingListings");
+const CreditCard = require("../models/CreditCard");
 
 module.exports = () => {
-  //KIV
-  router.post("/register-credit-card-services", async (req, res) => {
-    const response = "Insertion query to Mongo with form data";
+  router.post("/view-card-details", async (req, res) => {
+    console.log(req.body);
+    const card = await CreditCard.findOne();
 
-    // const card = await CreditCardTransactions.create({
-    //   name: "Name",
-    //   description: "desc",
-    // });
-
-    return res.send({ ok: true, msg: "Credit Card System Registered" });
+    return res.send({
+      ok: true,
+      msg: "Credit Card Details Fetched",
+      card,
+    });
   });
 
   router.get("/view-credit-card-transactions", async (req, res) => {
