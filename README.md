@@ -46,7 +46,7 @@ You can use our application on Netlify or your local device.
 
 ```python
 # Terminal 3
-cd src/thesuitebygs
+cd src\thesuitebygs
 npm i
 npm start
 ```
