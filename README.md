@@ -20,10 +20,15 @@ The Suite is a one-stop financial cloud for small to medium enterprises who want
 
 ### 1. Start the server
 
-```
+```python
+# Terminal 1
 cd src/server
 npm i
 node index.js
+```
+
+```python
+# Terminal 2
 py main.py
 ```
 
@@ -38,7 +43,8 @@ You can use our application on Netlify or your local device.
 
 #### b) Local
 
-```
+```python
+# Terminal 3
 cd src/thesuitebygs
 npm i
 npm start
