@@ -25,8 +25,9 @@ module.exports = () => {
   });
 
   router.post("/historical-prices", async (req, res) => {
-    // const ticker = req.body.ticker
-    const ticker = "AAPL";
+    const ticker = req.body.ticker;
+    console.log(ticker);
+    // const ticker = "AAPL";
     var url = `http://127.0.0.1:3001/getStocks/${ticker}`;
     const prices = await axios.get(url);
     const pricesData = prices["data"];
@@ -37,8 +38,8 @@ module.exports = () => {
     try {
       const { estimatedProfitPerShare, numberOfShares, initialInvestment } =
         req.body;
-      const risk =
-        (estimatedProfitPerShare * numberOfShares) / initialInvestment;
+      let risk = (estimatedProfitPerShare * numberOfShares) / initialInvestment;
+      risk = risk.toFixed(2);
       return res.send({ ok: true, msg: "Risk / Reward Ratio: ", risk });
     } catch (e) {
       return res.send({ ok: false, e });
