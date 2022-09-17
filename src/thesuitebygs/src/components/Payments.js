@@ -48,7 +48,7 @@ function Payments() {
 
   const handleInlineEdit = (event) => {
     const { name, value } = event.currentTarget;
-    console.log(name, value);
+    console.log("HI", name, value);
     setCardDetails((cardDetails) => ({
       ...cardDetails,
       ...{ [name]: value },
@@ -82,25 +82,27 @@ function Payments() {
       });
 
       if (response.data.ok) {
-        let transactions = response.data.transactions
+        let transactions = response.data.transactions;
         console.log(transactions);
-        let totalAmount = 0
-        let userList = []
+        let totalAmount = 0;
+        let userList = [];
         for (let i = 0; i < transactions.length; i++) {
-          totalAmount = totalAmount + transactions[i].transactionAmount
+          totalAmount = totalAmount + transactions[i].transactionAmount;
           if (!userList.includes(transactions[i].userid)) {
-            userList.push(transactions[i].userId)
+            userList.push(transactions[i].userId);
           }
         }
-        setTotalNoTransactions(transactions.length)
-        setTotalTransactionAmt(totalAmount)
-        setActiveUsers(userList.length)
+        setTotalNoTransactions(transactions.length);
+        setTotalTransactionAmt(totalAmount);
+        setActiveUsers(userList.length);
         if (transactions.length > 0) {
-          setAvgNoTransactions((transactions.length / userList.length).toFixed(2))
-          setAvgTransactionAmt((totalAmount / userList.length).toFixed(2))
+          setAvgNoTransactions(
+            (transactions.length / userList.length).toFixed(2)
+          );
+          setAvgTransactionAmt((totalAmount / userList.length).toFixed(2));
         } else {
-          setAvgNoTransactions(0)
-          setAvgTransactionAmt(0)
+          setAvgNoTransactions(0);
+          setAvgTransactionAmt(0);
         }
       } else {
         alert("Error Occured");
@@ -171,6 +173,7 @@ function Payments() {
                             <Form.Control
                               onChange={handleInlineEdit}
                               placeholder={cardDetails.interestRate}
+                              name="interestRate"
                             ></Form.Control>
                           </Col>
                           <Col>
@@ -178,6 +181,7 @@ function Payments() {
                             <Form.Control
                               onChange={handleInlineEdit}
                               placeholder={cardDetails.annualFee}
+                              name="annualFee"
                             ></Form.Control>
                           </Col>
                         </Row>
@@ -189,6 +193,7 @@ function Payments() {
                             <Form.Control
                               onChange={handleInlineEdit}
                               placeholder={cardDetails.balanceTransferFee}
+                              name="balanceTransferFee"
                             ></Form.Control>
                           </Col>
                           <Col>
@@ -196,6 +201,7 @@ function Payments() {
                             <Form.Control
                               onChange={handleInlineEdit}
                               placeholder={cardDetails.signupBonus}
+                              name="signupBonus"
                             ></Form.Control>
                           </Col>
                         </Row>
